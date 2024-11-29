@@ -1,5 +1,5 @@
 import React from 'react';
-import profileImage from '../images/myImage.png';
+//import profileImage from '../images/myImage.png';
 
 
 const Home = ({ onScrollToProjects, }
