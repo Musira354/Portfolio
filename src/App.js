@@ -4,10 +4,13 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
+import CVSection from './components/CVSection';
+
 function App() {
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const projectsRef = useRef(null);
+  const CVSectionRef = useRef(null);
   const contactRef = useRef(null);
   return (
     <div className='font-sans text-gray-900'>
@@ -20,6 +23,9 @@ function App() {
         }
         onScrollToProjects={() =>
           projectsRef.current.scrollIntoView({ behavior: "smooth" })
+        }
+        onScrollToCVSection={() =>
+          CVSectionRef.current.scrollIntoView({ behavior: "smooth" })
         }
         onScrollToContact={() =>
           contactRef.current.scrollIntoView({ behavior: "smooth" })
@@ -37,6 +43,9 @@ function App() {
       </section>
       <section ref={projectsRef}>
         <Projects />
+      </section>
+      <section ref={contactRef}>
+        <CVSection />
       </section>
       <section ref={contactRef}>
         <Contact />
