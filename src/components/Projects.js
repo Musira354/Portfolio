@@ -3,28 +3,39 @@ import React from 'react';
 const projects = [
     {
         title: 'Octane Brand Pages',
-        description: 'As part of my role at LAAM, I led the development of dynamic brand page templates, ensuring a seamless and engaging user experience. I built the UI components, including the navbar, menus, hero banner, cards, contact section, and footer, all powered by dynamic data fetched from databases. On the backend, I developed and optimized APIs using Node.js to efficiently serve data to the frontend. Additionally, I enhanced existing APIs to improve performance and scalability. On the frontend, I utilized Vue.js to create a responsive and interactive interface, while implementing optimizations to significantly improve page load speed. This project showcases my ability to deliver end-to-end solutions, from UI design and API development to performance optimization.',
+        description: 'As part of my role at LAAM, I led the development of dynamic brand page templates...',
         link: 'https://rangehaya.com/',
-        video: '/brand-page.mov', // Add the video path here
-        techStack: ['Vue.js', 'Node.js', 'Express', 'REST APIs', 'JavaScript', 'HTML/CSS', 'PostgreSQL'], // Add tech stack
+        video: 'https://www.youtube.com/watch?v=zL6f82NzVcQ', // Standard YouTube video
+        techStack: ['Vue.js', 'Node.js', 'Express', 'REST APIs'],
     },
-
     {
         title: 'Shared Expense App',
-        description: 'Engineered a React Native application for managing shared expenses, integrating Firebase to facilitate real-time updates and streamline receipt management, resulting in users completing transactions 10% faster than previous methods.',
+        description: 'Engineered a React Native application for managing shared expenses...',
         link: 'https://github.com/Musira354/SPLIT-v1',
-        video: '/shared-expense-demo.mp4', // Add the video path here
-        techStack: ['React Native', 'Firebase', 'JavaScript', 'Expo'], // Add tech stack
+        video: 'https://www.youtube.com/shorts/Z6B7N_JtywM', // YouTube Shorts link
+        techStack: ['React Native', 'Firebase', 'JavaScript', 'Expo'],
     },
     {
         title: 'E-commerce Web App',
-        description: 'Created a full e-commerce app with React, leveraging Axios to optimize API requests. Prioritized Ul code optimizations that reduced rendering time from four seconds to 1.8 seconds for over 5 major components.',
+        description: 'Created a full e-commerce app with React, leveraging Axios to optimize API requests...',
         link: 'https://63f2201c5175e46c55239ac3--taupe-selkie-b8cc7a.netlify.app/',
-        video: '/unfaded.mov', // Add the video path here
-        techStack: ['React', 'Axios', 'Node.js', 'Express', 'Redux'], // Add tech stack
+        video: 'https://www.youtube.com/watch?v=6aLoFdEvoZY', // Standard YouTube video
+        techStack: ['React', 'Axios', 'Node.js', 'Express', 'Redux'],
     },
-    // Add more projects here
 ];
+
+function getEmbedUrl(url) {
+    if (url.includes("watch?v=")) {
+        return url.replace("watch?v=", "embed/");
+    } else if (url.includes("shorts/")) {
+        return url.replace("shorts/", "embed/");
+    }
+    return url;
+}
+
+function isYouTubeLink(url) {
+    return url.includes("youtube.com") || url.includes("youtu.be");
+}
 
 function Projects() {
     return (
@@ -39,6 +50,7 @@ function Projects() {
                         >
                             <h3 className="text-xl font-bold text-gray-800">{project.title}</h3>
                             <p className="mt-2 text-gray-600">{project.description}</p>
+
                             {project.techStack && (
                                 <div className="mt-4">
                                     <h4 className="text-lg font-semibold text-gray-700">Tech Stack</h4>
@@ -54,18 +66,29 @@ function Projects() {
                                     </div>
                                 </div>
                             )}
+
                             {project.video && (
                                 <div className="mt-4">
-                                    <video controls width="100%">
-                                        <source src={project.video} type="video/mp4" />
-                                        Your browser does not support the video tag.
-                                    </video>
+                                    {isYouTubeLink(project.video) ? (
+                                        <iframe
+                                            width="100%"
+                                            height="250"
+                                            src={getEmbedUrl(project.video)}
+                                            title="YouTube video player"
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    ) : (
+                                        <video controls width="100%">
+                                            <source src={project.video} type="video/mp4" />
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    )}
                                 </div>
                             )}
-                            <a
-                                href={project.link}
-                                className="block mt-4 text-blue-600 hover:underline"
-                            >
+
+                            <a href={project.link} className="block mt-4 text-blue-600 hover:underline">
                                 View Project
                             </a>
                         </div>
